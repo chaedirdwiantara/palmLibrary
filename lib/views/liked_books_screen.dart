@@ -4,29 +4,21 @@ import 'package:palm_library/views/book_detail_screen.dart';
 import 'package:palm_library/widgets/book_item.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class LikedBooksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookController = Provider.of<BookController>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gutenberg Books'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {
-              Navigator.pushNamed(context, '/liked-books');
-            },
-          ),
-        ],
+        title: const Text('Liked Books'),
       ),
-      body: bookController.isLoading
-          ? const Center(child: CircularProgressIndicator())
+      body: bookController.likedBooks.isEmpty
+          ? const Center(child: Text('No liked books yet'))
           : ListView.builder(
-              itemCount: bookController.books.length,
+              itemCount: bookController.likedBooks.length,
               itemBuilder: (context, index) {
-                final book = bookController.books[index];
+                final book = bookController.likedBooks[index];
                 return BookItem(
                   book: book,
                   onTap: () {
