@@ -5,8 +5,8 @@ import 'package:palm_library/models/book.dart';
 class ApiService {
   static const String _baseUrl = 'http://gutendex.com/books';
 
-  static Future<List<Book>> fetchBooks() async {
-    final response = await http.get(Uri.parse(_baseUrl));
+  static Future<List<Book>> fetchBooks({int page = 1}) async {
+    final response = await http.get(Uri.parse('$_baseUrl?page=$page'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data['results'] as List)

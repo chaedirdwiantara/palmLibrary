@@ -5,6 +5,10 @@ import 'package:palm_library/views/liked_books_screen.dart';
 import 'package:palm_library/views/search_screen.dart';
 import 'package:provider/provider.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -10,9 +10,23 @@ class BookItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.network(book.imageUrl),
-      title: Text(book.title),
-      subtitle: Text(book.author),
+      contentPadding: const EdgeInsets.all(8.0),
+      leading: Image.network(
+        book.imageUrl,
+        width: 50,
+        height: 50,
+        fit: BoxFit.cover,
+      ),
+      title: Text(
+        book.title,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Text(
+        book.author,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       trailing: IconButton(
         icon: Icon(
           book.isLiked ? Icons.favorite : Icons.favorite_border,
