@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:palm_library/controllers/book_controller.dart';
-import 'package:palm_library/views/book_detail_screen.dart';
-import 'package:palm_library/widgets/book_item.dart';
+import 'package:palm_library/widgets/search_bar.dart';
+import 'package:palm_library/widgets/book_list.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,6 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -22,52 +24,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bookController = Provider.of<BookController>(context);
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gutenberg Books'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {
-              Navigator.pushNamed(context, '/liked-books');
-            },
-          ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 0, // Menyembunyikan tinggi AppBar
+      ),
+      body: Column(
+        children: [
+          SearchBar(searchController: _searchController),
+          Expanded(child: BookList()),
         ],
       ),
-      body: NotificationListener<ScrollNotification>(
-        onNotification: (ScrollNotification scrollInfo) {
-          if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
-              !bookController.isLoading) {
-            bookController.loadMoreBooks();
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Likes',
+          ),
+        ],
+        currentIndex: 0,
+        onTap: (index) {
+          if (index == 1) {
+            Navigator.pushNamed(context, '/liked-books');
           }
-          return false;
         },
-        child: bookController.isLoading && bookController.books.isEmpty
-            ? const Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                itemCount: bookController.books.length + 1,
-                itemBuilder: (context, index) {
-                  if (index == bookController.books.length) {
-                    return bookController.isLoading
-                        ? const Center(child: CircularProgressIndicator())
-                        : const SizedBox();
-                  }
-                  final book = bookController.books[index];
-                  return BookItem(
-                    book: book,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BookDetailScreen(book: book),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
       ),
     );
   }

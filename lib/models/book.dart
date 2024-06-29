@@ -17,7 +17,9 @@ class Book {
     return Book(
       id: json['id'],
       title: json['title'],
-      author: json['authors'][0]['name'],
+      author: json['authors'].isNotEmpty
+          ? json['authors'][0]['name']
+          : 'Unknown Author',
       imageUrl:
           json['formats']['image/jpeg'] ?? 'https://via.placeholder.com/150',
     );

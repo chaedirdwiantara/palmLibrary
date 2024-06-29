@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:palm_library/controllers/book_controller.dart';
-import 'package:palm_library/views/home_screen.dart';
-import 'package:palm_library/views/liked_books_screen.dart';
-import 'package:palm_library/views/search_screen.dart';
 import 'package:provider/provider.dart';
+import 'controllers/book_controller.dart';
+import 'views/home_screen.dart';
+import 'views/liked_books_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => HomeScreen(),
           '/liked-books': (context) => LikedBooksScreen(),
-          '/search': (context) => SearchScreen(),
         },
       ),
     );

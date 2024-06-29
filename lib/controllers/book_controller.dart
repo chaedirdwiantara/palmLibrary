@@ -8,8 +8,7 @@ class BookController extends ChangeNotifier {
   bool _isLoading = false;
   int _page = 1;
 
-  List<Book> get books => _books;
-  List<Book> get searchResults => _searchResults;
+  List<Book> get books => _searchResults.isNotEmpty ? _searchResults : _books;
   bool get isLoading => _isLoading;
 
   void fetchBooks() async {
@@ -36,6 +35,11 @@ class BookController extends ChangeNotifier {
     notifyListeners();
     _searchResults = await ApiService.searchBooks(query);
     _isLoading = false;
+    notifyListeners();
+  }
+
+  void clearSearch() {
+    _searchResults = [];
     notifyListeners();
   }
 
