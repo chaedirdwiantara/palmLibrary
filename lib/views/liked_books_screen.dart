@@ -13,27 +13,31 @@ class LikedBooksScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        automaticallyImplyLeading: false, // Menghilangkan back button
+        automaticallyImplyLeading: false,
+        toolbarHeight: 0,
       ),
-      body: bookController.likedBooks.isEmpty
-          ? const Center(child: Text('No liked books yet'))
-          : ListView.builder(
-              itemCount: bookController.likedBooks.length,
-              itemBuilder: (context, index) {
-                final book = bookController.likedBooks[index];
-                return BookItem(
-                  book: book,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookDetailScreen(book: book),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 6.0, right: 6.0),
+        child: bookController.likedBooks.isEmpty
+            ? const Center(child: Text('No liked books yet'))
+            : ListView.builder(
+                itemCount: bookController.likedBooks.length,
+                itemBuilder: (context, index) {
+                  final book = bookController.likedBooks[index];
+                  return BookItem(
+                    book: book,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookDetailScreen(book: book),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+      ),
     );
   }
 }
