@@ -11,7 +11,9 @@ class LikedBooksScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Liked Books'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        automaticallyImplyLeading: false, // Menghilangkan back button
       ),
       body: bookController.likedBooks.isEmpty
           ? const Center(child: Text('No liked books yet'))

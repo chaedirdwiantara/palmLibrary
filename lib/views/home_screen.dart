@@ -28,31 +28,17 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        toolbarHeight: 0, // Menyembunyikan tinggi AppBar
+        automaticallyImplyLeading: false,
+        toolbarHeight: 0,
       ),
-      body: Column(
-        children: [
-          SearchBar(searchController: _searchController),
-          Expanded(child: BookList()),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Likes',
-          ),
-        ],
-        currentIndex: 0,
-        onTap: (index) {
-          if (index == 1) {
-            Navigator.pushNamed(context, '/liked-books');
-          }
-        },
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10.0, left: 6.0, right: 6.0),
+        child: Column(
+          children: [
+            SearchBar(searchController: _searchController),
+            Expanded(child: BookList()),
+          ],
+        ),
       ),
     );
   }
