@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:palm_library/models/book.dart';
+import 'package:palm_library/controllers/book_controller.dart';
+import 'package:provider/provider.dart';
 
 class BookItem extends StatelessWidget {
   final Book book;
@@ -9,6 +11,8 @@ class BookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bookController = Provider.of<BookController>(context, listen: false);
+
     return ListTile(
       contentPadding: const EdgeInsets.all(8.0),
       leading: Image.network(
@@ -33,7 +37,7 @@ class BookItem extends StatelessWidget {
           color: book.isLiked ? Colors.red : null,
         ),
         onPressed: () {
-          book.isLiked = !book.isLiked;
+          bookController.likeBook(book);
         },
       ),
       onTap: onTap,

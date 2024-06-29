@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:palm_library/controllers/book_controller.dart';
-import 'package:palm_library/views/book_detail_screen.dart';
 import 'package:palm_library/widgets/book_item.dart';
+import 'package:palm_library/views/book_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class BookList extends StatelessWidget {
