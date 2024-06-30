@@ -28,7 +28,7 @@ class SearchBar extends StatelessWidget {
         decoration: InputDecoration(
           labelText: 'Search Books',
           border: const OutlineInputBorder(),
-          isDense: true, // Mengurangi tinggi field
+          isDense: true,
           suffixIcon: IconButton(
             icon: const Icon(Icons.clear),
             onPressed: () {
